@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E.H Mahesh Chander | Cyber Security Events</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #020c1b;
+      color: #e6f1ff;
+      overflow-x: hidden;
+    }
+
+    /* ===== 3D PARTICLE BACKGROUND ===== */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    /* ===== HEADER / NAME ===== */
+    .top-name {
+      position: fixed;
+      top: 15px;
+      width: 100%;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: #00ff99;
+      text-shadow: 0 0 15px rgba(0,255,153,0.8);
+      z-index: 10;
+    }
+
+    /* ===== HERO ===== */
+    header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: #00ff99;
+      margin-bottom: 20px;
+      animation: glow 3s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ff99; }
+      to { text-shadow: 0 0 30px #00ff99; }
+    }
+
+    .hero p {
+      max-width: 900px;
+      margin: auto;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      line-height: 1.8;
+      color: #ccd6f6;
+      animation: fadeUp 1.5s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== STATS ===== */
+    section.stats {
+      padding: 80px 20px;
+    }
+
+    .stats-container {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
+    }
+
+    .stat-box {
+      background: rgba(10,25,47,0.85);
+      border: 1px solid rgba(0,255,153,0.3);
+      border-radius: 18px;
+      padding: 40px 20px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 40px rgba(0,255,153,0.2);
+      transform: perspective(800px) rotateX(8deg);
+      transition: transform 0.6s ease;
+    }
+
+    .stat-box:hover {
+      transform: perspective(800px) rotateX(0deg) scale(1.05);
+    }
+
+    .stat-box h2 {
+      font-size: 2.8rem;
+      color: #00ff99;
+    }
+
+    .stat-box p {
+      margin-top: 10px;
+      color: #a8b2d1;
+    }
+
+    /* ===== TIMELINE ===== */
+    section.timeline {
+      padding: 90px 20px;
+    }
+
+    .timeline h2 {
+      text-align: center;
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      color: #00ff99;
+      margin-bottom: 60px;
+    }
+
+    .timeline-container {
+      max-width: 1000px;
+      margin: auto;
+      position: relative;
+    }
+
+    .timeline-container::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, #00ff99, transparent);
+      transform: translateX(-50%);
+    }
+
+    .event {
+      width: 50%;
+      padding: 20px 40px;
+      position: relative;
+      animation: slideEvent 1.5s ease forwards;
+    }
+
+    @keyframes slideEvent {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .event.left { left: 0; text-align: right; }
+    .event.right { left: 50%; }
+
+    .event::after {
+      content: "";
+      position: absolute;
+      top: 30px;
+      width: 16px;
+      height: 16px;
+      background: #00ff99;
+      border-radius: 50%;
+      box-shadow: 0 0 20px #00ff99;
+    }
+
+    .event.left::after { right: -8px; }
+    .event.right::after { left: -8px; }
+
+    .event h3 { margin-bottom: 10px; }
+    .event p { color: #a8b2d1; font-size: 0.95rem; }
+
+    /* ===== MOBILE FIX ===== */
+    @media (max-width: 768px) {
+      .timeline-container::before { left: 10px; }
+      .event { width: 100%; left: 0; text-align: left; padding-left: 40px; }
+      .event::after { left: 2px; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.85rem;
+      color: #8892b0;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="particles"></canvas>
+
+  <div class="top-name">E.H MAHESH CHANDER</div>
+
+  <header>
+    <div class="hero">
+      <h1>Global Cyber Security Events</h1>
+      <p>
+        Aaj tak duniya bhar me hazaaro cyber security events organize ho chuke hain.
+        Inka main aim cyber attacks ko samajhna, hackers aur users ko educate karna,
+        aur digital duniya ko secure banana raha hai.
+      </p>
+    </div>
+  </header>
+
+  <section class="stats">
+    <div class="stats-container">
+      <div class="stat-box"><h2 data-count="25000">0</h2><p>Total Cyber Security Events</p></div>
+      <div class="stat-box"><h2 data-count="120">0</h2><p>Countries Involved</p></div>
+      <div class="stat-box"><h2 data-count="5000">0</h2><p>Cyber Conferences</p></div>
+      <div class="stat-box"><h2 data-count="15000">0</h2><p>Awareness Programs</p></div>
+    </div>
+  </section>
+
+  <section class="timeline">
+    <h2>Cyber Security Evolution</h2>
+    <div class="timeline-container">
+      <div class="event left"><h3>2000</h3><p>Cyber security conferences ki shuruaat hui.</p></div>
+      <div class="event right"><h3>2010</h3><p>Ethical hacking events aur bug bounty ka trend aaya.</p></div>
+      <div class="event left"><h3>2015</h3><p>Global cyber awareness campaigns start hui.</p></div>
+      <div class="event right"><h3>2020</h3><p>Virtual cyber security events ne worldwide reach badhai.</p></div>
+      <div class="event left"><h3>2024+</h3><p>AI aur Zero-Trust security par focused global summits.</p></div>
+    </div>
+  </section>
+
+  <!-- BENEFITS SECTION -->
+  <section class="stats">
+    <div class="stats-container">
+      <div class="stat-box">
+        <h2>Cyber Expert Benefits</h2>
+        <p>
+          Cyber security experts high-demand professionals hote hain. Inko global jobs,
+          high salary, government & private sector me respect aur growth milti hai.
+        </p>
+      </div>
+      <div class="stat-box">
+        <h2>Ethical Hacker Benefits</h2>
+        <p>
+          Ethical hackers legally systems test karte hain. Bug bounty, freelancing,
+          MNC jobs, aur cyber crime prevention me important role hota hai.
+        </p>
+      </div>
+      <div class="stat-box">
+        <h2>Other Cyber Roles</h2>
+        <p>
+          SOC Analyst, Security Researcher, Forensic Expert, Cloud Security Engineer
+          jaise roles future-proof careers hain.
+        </p>
+      </div>
+      <div class="stat-box">
+        <h2>Why Cyber Security?</h2>
+        <p>
+          Digital India aur global internet growth ke sath cyber security ek essential
+          shield ban chuki hai for users, companies aur nations.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE CYBER ATTACK MAP (SIMULATION) -->
+  <section class="timeline">
+    <h2>Live World Cyber Attack Map (Simulation)</h2>
+    <p style="text-align:center;max-width:900px;margin:0 auto 40px;color:#a8b2d1;">
+      Ye ek visual simulation hai jo real-time cyber attacks ko represent karta hai.
+      Educational & awareness purpose ke liye use hota hai.
+    </p>
+    <canvas id="mapCanvas" style="width:100%;max-width:1000px;height:400px;display:block;margin:0 auto;border:1px solid rgba(0,255,153,0.3);border-radius:16px;"></canvas>
+  </section>
+
+  <footer>
+    © 2025 | Designed by E.H Mahesh Chander | Mobile & Desktop Optimized
+  </footer>
+
+  <script>
+    /* PARTICLES */
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let w, h;
+
+    function resize() {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    const particles = Array.from({ length: 120 }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      z: Math.random() * 2 + 0.5,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5
+    }));
+
+    function animate() {
+      ctx.clearRect(0, 0, w, h);
+      particles.forEach(p => {
+        p.x += p.vx * p.z;
+        p.y += p.vy * p.z;
+        if (p.x < 0 || p.x > w) p.vx *= -1;
+        if (p.y < 0 || p.y > h) p.vy *= -1;
+        ctx.fillStyle = 'rgba(0,255,153,0.7)';
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.z * 2, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    /* COUNTERS */
+    document.querySelectorAll('[data-count]').forEach(counter => {
+      let i = 0;
+      const end = +counter.dataset.count;
+      const inc = Math.ceil(end / 200);
+      const timer = setInterval(() => {
+        i += inc;
+        if (i >= end) {
+          counter.innerText = end + '+';
+          clearInterval(timer);
+        } else counter.innerText = i;
+      }, 20);
+    });
+      function updateStats(){
+    const val=document.getElementById('eventCount').value;
+    if(val){
+      document.querySelector('[data-count="25000"]').innerText=val+'+';
+      alert('Stats Updated (Demo Mode)');
+    }
+  }
+
+</script>
+
+</body>
+</html>
